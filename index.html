@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Repositories Listing</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="py-5">
+    <div class="container">
+        <div id="userSection" class="jumbotron d-flex p-5 align-items-center bg-gradient">
+            <div class="profile-container">
+                <div class="profile-ring">
+                    <div class="outer-ring-for-profile-pic"></div>
+                    <img id="userAvatar" src="" alt="User Avatar" class="rounded-circle">
+                </div>
+                <a class="d-flex justify-content-center align-items-center" id="githubLink" href="#" target="_blank"></a>
+            </div>
+            <div class="user-details ms-4">
+                <h1 id="userName" class="display-4"></h1>
+                <p id="userBio" class="lead"></p>
+                <p id="userLocation"></p>
+                <p id="userSocialLinks">Twitter</p>
+            </div>
+        </div>
+
+        <div class="container my-4">
+            <div class="input-group search-bar">
+                <input type="text" class="form-control" id="searchInput" placeholder="Search repositories...">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" id="searchButton" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="repositoriesList" class="repo-container"></div>
+
+        <div id="pagination" class="text-center mt-4"></div>
+
+        <div id="overlay" class="overlay">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+
+        <div id="loadingIndicator"></div>
+    </div>
+
+    <div id="butOldNew" class="text-center mt-4 ">
+        <button id="olderButton" class="btn btn-outline-primary me-5 " disabled>Older</button>
+        <button id="newerButton" class="btn btn-outline-primary ms-5" disabled>Newer</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
