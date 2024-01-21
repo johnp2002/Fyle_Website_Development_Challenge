@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    const token = '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'; // Replace with your actual token
+    const token = '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'; // Replace with your actual token
     let currentPage = 1;
 
     function updatePaginationButtons() {
