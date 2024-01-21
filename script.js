@@ -1,4 +1,16 @@
+const encryptedToken = 'g$h$p$_$M$R$2$u$q$4$h$2$K$H$1$f$f$O$P$X$L$i$i$2$8$6$6$b$S$6$z$0$x$3$3$W$G$0$9$q$';
+    var token = ''; // Replace with your actual token
+
+    ////////////////After Replacing yout token remove this loop /////////////////////////////////
+    
+    for (const iterator of encryptedToken) {
+        if(iterator !== '$'){
+            token += iterator;
+        }
+        
+    }
 document.addEventListener('DOMContentLoaded', function () {
+    
     const username = 'johnpapa';
     const repositoriesList = document.getElementById('repositoriesList');
     const userAvatar = document.getElementById('userAvatar');
@@ -23,6 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fetchRepositoriesWithSearch(searchTerm, 10); // Pass perPage here
         }
     });
+
     searchInput.addEventListener('input', function () {
         const searchTerm = searchInput.value.trim();
         if (searchTerm === '') {
@@ -30,11 +43,11 @@ document.addEventListener('DOMContentLoaded', function () {
             fetchRepositories(currentPage);
         } else {
             // If search input is not empty, fetch repositories based on the search term
-            // fetchRepositoriesWithSearch(searchTerm, 10); // Pass perPage here
+            fetchRepositoriesWithSearch(searchTerm, 10); // Pass perPage here
         }
     });
-
-    const token = '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'; // Replace with your actual token
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////
     let currentPage = 1;
 
     function updatePaginationButtons() {
@@ -109,24 +122,32 @@ document.addEventListener('DOMContentLoaded', function () {
                 'Authorization': `Bearer ${token}`
             }
         })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch repositories: ${response.status} ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(repositories => {
-                repositoriesList.innerHTML = '';
-
-                repositories.forEach(repo => {
-                    displayRepository(repo);
-                });
-
-                hideLoading();
-                currentPage = page;
-                updatePaginationButtons();
+                if (Array.isArray(repositories)) {
+                    repositoriesList.innerHTML = '';
+                    repositories.forEach(repo => {
+                        displayRepository(repo);
+                    });
+    
+                    hideLoading();
+                    currentPage = page;
+                    updatePaginationButtons();
+                } else {
+                    throw new Error('Invalid response format. Expected an array.');
+                }
             })
             .catch(error => {
-                console.error('Error fetching repositories:', error);
+                console.error(error.message);
                 hideLoading();
             });
-        hideLoading();
     }
+    
 
     function displayRepository(repo) {
         const repoCard = document.createElement('div');
